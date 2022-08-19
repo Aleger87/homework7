@@ -5,7 +5,7 @@ public class Main {
         task2(fullName);
         fullName = "Иванов Семён Семёнович";
         task3(fullName);
-        fullName = "Ivanov Ivan Ivanovich";
+        fullName = "Степанов Сергей Геннадьевич";
         task4(fullName);
         //task5();
         //task6();
@@ -61,26 +61,36 @@ public class Main {
 
 
         /*
-        *К нам снова обратились за помощью, но теперь уже для того, чтобы написать алгоритм, разбивающий одну строку с Ф. И. О. на три — на фамилию, имя и отчество.
+        К нам снова обратились за помощью, но теперь уже для того, чтобы написать алгоритм, разбивающий одну строку с Ф. И. О. на три — на фамилию, имя и отчество.
         В качестве исходных данных используйте:
         Ф. И. О. сотрудника: “Ivanov Ivan Ivanovich”;
         строка fullName — для хранения Ф. И. О. сотрудника в формате фамилия - имя - отчество;
         переменная firstName — для хранения имени;
         переменная middleName — для хранения отчества;
         переменная lastName — для хранения фамилии.
-        Решите задание с помощью метода substring().
+        Решите задание с помощью метода substring().  String s1 = s.substring(2, 4);
+        Подсказка - Определить индексы символов помогут методы indexOf() и lastIndexOf().
         Результат программы выведите в формате:
         “Имя сотрудника — …”
         “Фамилия сотрудника — …”
         “Отчество сотрудника — ...”
         * */
         private static void task4 (String fullName) {
+            System.out.println("Вариант 1");
             String[] arr = fullName.split(" ");
             String lastName = arr[0];
             String firstName = arr[1];
             String middleName = arr[2];
             System.out.println("Имя сотрудника - " + firstName + "\nФамилия сотрудника - " + lastName + "\nОтчество сотрудника - " +middleName);
+            System.out.println("Вариант 2");
+            int a = fullName.indexOf(' ');
+            int b = fullName.lastIndexOf(' ');
+            lastName = fullName.substring(0,a);
+            firstName = fullName.substring(a,b);
+            middleName = fullName.substring(b,fullName.length());
 
+
+            System.out.println("Имя сотрудника - " + firstName + "\nФамилия сотрудника - " + lastName + "\nОтчество сотрудника - " +middleName);
 
         }
 
