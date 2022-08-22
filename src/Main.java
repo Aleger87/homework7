@@ -4,8 +4,7 @@ import java.text.CharacterIterator;
 import java.util.Arrays;
 import java.util.spi.AbstractResourceBundleProvider;
 
-import static java.lang.System.exit;
-import static java.lang.System.out;
+import static java.lang.System.*;
 
 
 public class Main {
@@ -183,9 +182,10 @@ public class Main {
             out.println("Вариант 1");
             String text = "aabccddefgghiijjkk";
             String newText = "";
-            for (int i = 0; i < text.length(); i++) {
-                if(!newText.contains(String.valueOf(text.charAt(i))) && text.charAt(i) == text.charAt(i+1)) {
-                    newText += (String.valueOf(text.charAt(i)));
+            for (int i = 1; i < text.length(); i++) {
+                if(!newText.contains(String.valueOf(text.charAt(i))) && text.charAt(i) == text.charAt(i-1)) {
+                    //newText += (String.valueOf(text.charAt(i)));
+                    out.print(text.charAt(i));;
                 }
             }
             out.println(newText);
@@ -198,8 +198,8 @@ public class Main {
             long start1 = System.nanoTime();
             out.println("Вариант 2");
             StringBuilder textNew = new StringBuilder();
-            for (int i = 0; i < text.length(); i++) {
-                if(!contains(textNew, Character.toString(text.charAt(i))) && text.charAt(i) == text.charAt(i+1)) {
+            for (int i = 1; i < text.length(); i++) {
+                if(!contains(textNew, Character.toString(text.charAt(i))) && text.charAt(i) == text.charAt(i-1)) {
                     textNew.append(text.charAt(i));
                 }
             }
@@ -251,11 +251,3 @@ public class Main {
 
 
 }
-/*
-long start = System.nanoTime();
-// выполнение какой-то логики
-Thread.sleep(1000);
-long finish = System.nanoTime();
-long elapsed = finish - start;
-System.out.println("Прошло времени, нс: " + elapsed);
-* */
