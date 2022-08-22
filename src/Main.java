@@ -1,15 +1,24 @@
+
+import java.io.StreamCorruptedException;
+import java.text.CharacterIterator;
+import java.util.Arrays;
+import java.util.spi.AbstractResourceBundleProvider;
+
+import static java.lang.System.exit;
+import static java.lang.System.out;
+
+
 public class Main {
     public static void main(String[] args) {
+        String fullName = "Иванов Семён Семёнович";
         task1();
-        String fullName = "Ivanov Ivan Ivanovich";
         task2(fullName);
-        fullName = "Иванов Семён Семёнович";
         task3(fullName);
-        fullName = "Степанов Сергей Геннадьевич";
         task4(fullName);
-        //task5();
-        //task6();
-        //task7();
+        task5(fullName);
+        task6();
+        task7();
+
     }
 
 
@@ -26,12 +35,12 @@ public class Main {
     В качестве данных для задачи используйте “Ivanov Ivan Ivanovich”.
     * */
         private static void task1 (){
-            System.out.println("Задание 1");
+            out.println("Задание 1");
             String lastName = "Ivanov";
             String firstName = "Ivan";
             String middleName = "Ivanovich";
             String fullName = lastName + " " + firstName + " " + middleName;
-            System.out.println("ФИО сотрудника - " + fullName);
+            out.println("ФИО сотрудника - " + fullName);
         }
 
         /*
@@ -44,8 +53,8 @@ public class Main {
         * */
 
         private static void task2 (String fullName){
-            System.out.println("Задание 2");
-            System.out.println("Данные ФИО сотрудника для заполнения отчета — " + fullName.toUpperCase());
+            out.println("Задание 2");
+            out.println("Данные ФИО сотрудника для заполнения отчета — " + fullName.toUpperCase());
         }
 
         /*
@@ -55,8 +64,8 @@ public class Main {
         Выведите результат программы в консоль в формате: ”Данные ФИО сотрудника — ...”
         * */
         private static void task3 (String fullName){
-            System.out.println("Задание 3");
-            System.out.println(fullName.replace('ё', 'е'));
+            out.println("Задание 3");
+            out.println(fullName.replace('ё', 'е'));
         }
 
 
@@ -75,7 +84,9 @@ public class Main {
         “Фамилия сотрудника — …”
         “Отчество сотрудника — ...”
         * */
+
         private static void task4 (String fullName) {
+            out.println("Задание 4");
             System.out.println("Вариант 1");
             String[] arr = fullName.split(" ");
             String lastName = arr[0];
@@ -88,10 +99,163 @@ public class Main {
             lastName = fullName.substring(0,a);
             firstName = fullName.substring(a,b);
             middleName = fullName.substring(b,fullName.length());
-
-
             System.out.println("Имя сотрудника - " + firstName + "\nФамилия сотрудника - " + lastName + "\nОтчество сотрудника - " +middleName);
 
         }
 
+
+
+        /*
+        Периодически данные в наших регистрах заполняются неверно, и Ф. И. О. сотрудников записывают со строчных букв.
+        Такую оплошность нужно исправить, написав программу, которая преобразует написанное со строчных букв Ф. И. О. в правильный формат.
+        В качестве исходных данных используйте строку fullName c данными “ivanov ivan ivanovich“, которые нужно преобразовать в “Ivanov Ivan Ivanovich”.
+        Выведите результат программы в консоль в формате: “Верное написание Ф. И. О. сотрудника с заглавных букв — …”
+        Подсказка 1
+        Метод toCharArray() может быть полезен.
+        Подсказка 2
+        Для преобразования символа в верхний регистр следует использовать метод Character.toUpperCase(c), где c — символ.
+        * */
+
+        private static void task5 (String fullName){
+            System.out.println("Задание 5");
+            out.println("Вариант 1");
+            String str = "";
+            fullName = nameToLowerCase(fullName);
+            String[] fullNameCorrect = fullName.split(" ");
+            for (String word: fullNameCorrect){
+                word = correctName(word);
+                str = str + word + " ";
+            }
+            out.println("Верное написание Ф. И. О. сотрудника с заглавных букв — " + str);
+
+
+            out.println("Вариант 2 (списано)");
+            for (String name : fullNameCorrect){
+                out.print(name.replace(name.charAt(0), Character.toUpperCase(name.charAt(0))) + " ");
+            }
+
+
+        }
+
+        private static String correctName (String fullName) {
+                String newName = fullName.replace(fullName.substring(0, 1), fullName.toUpperCase().substring(0, 1));
+                return newName;
+        }
+        private static String nameToLowerCase (String fullName){
+            return fullName.toLowerCase();
+        }
+
+
+        /*
+        Имеется две строки.
+        Первая: "135"
+        Вторая: "246"
+        Соберите из двух строк одну, содержащую данные "123456".
+        Использовать сортировку нельзя.
+        Набор чисел задан для понимания позиций, которые они должны занять в итоговой строке.
+        Выведите результат в консоль в формате: “Данные строки — ….”
+        Подсказка
+        Следует использовать StringBuilder.
+        * */
+        private static void task6(){
+                out.println();
+                out.println("Задание 6");
+                String sb = "1357";
+                String sb1 = "2468";
+                StringBuilder text = new StringBuilder();
+                for (int i = 0; i < sb.length(); i++) {
+                    text.append(sb.charAt(i));
+                    text.append(sb1.charAt(i));
+                }
+                out.println(text);
+        }
+
+        /*Дана строка из букв английского алфавита "aabccddefgghiijjkk".
+        Нужно найти и напечатать буквы, которые дублируются в строке.
+        Обратите внимание, что строка отсортирована, т. е. дубли идут друг за другом.
+        В итоге в консоль должен быть выведен результат программы: "acdgijk".
+        */
+
+        private static void task7(){
+            long start = System.nanoTime();
+
+           // худший результат -
+            out.println("Вариант 1");
+            String text = "aabccddefgghiijjkk";
+            String newText = "";
+            for (int i = 0; i < text.length(); i++) {
+                if(!newText.contains(String.valueOf(text.charAt(i))) && text.charAt(i) == text.charAt(i+1)) {
+                    newText += (String.valueOf(text.charAt(i)));
+                }
+            }
+            out.println(newText);
+            long finish = System.nanoTime();
+            long elapsed = finish - start;
+            out.println("Прошло времени у Ал 1, нс: " + elapsed);
+
+
+            // наилучший результат +
+            long start1 = System.nanoTime();
+            out.println("Вариант 2");
+            StringBuilder textNew = new StringBuilder();
+            for (int i = 0; i < text.length(); i++) {
+                if(!contains(textNew, Character.toString(text.charAt(i))) && text.charAt(i) == text.charAt(i+1)) {
+                    textNew.append(text.charAt(i));
+                }
+            }
+            out.println(textNew);
+            long finish1 = System.nanoTime();
+            long elapsed1 = finish1 - start1;
+            out.println("Прошло времени у Ал 2, нс: " + elapsed1);
+
+
+            long start2 = System.nanoTime();
+            out.println("Вариант 3");
+            String s = "aabccddefgghiijjkk";
+            char[] arr = s.toCharArray();
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] == arr[i - 1]){
+                    out.print(arr[i]);
+                    while (i < arr.length && arr[i] == arr[i-1]){
+                        i++;
+                    }
+                }
+            }
+
+            out.println();
+            long finish2 = System.nanoTime();
+            long elapsed2 = finish2 - start2;
+            out.println("Прошло времени у Ан, нс: " + elapsed2);
+
+            long start3 = System.nanoTime();
+            out.println("Вариант 4");
+            String str  = "aabccddefgghiijjkk";
+            char[] us = str.toCharArray();
+            for (int i = 1; i < us.length; i++) {
+                if (us[i] == us[i - 1]){
+                    out.print(us[i]);
+                }
+            }
+            long finish3 = System.nanoTime();
+            long elapsed3 = finish3 - start3;
+            out.println();
+            out.println("Прошло времени у Ан, нс: " + elapsed3);
+
+
+
+        }
+         private static boolean contains(StringBuilder sb, String findString){
+                return sb.indexOf(findString) > -1;
+         }
+
+
+
 }
+/*
+long start = System.nanoTime();
+// выполнение какой-то логики
+Thread.sleep(1000);
+long finish = System.nanoTime();
+long elapsed = finish - start;
+System.out.println("Прошло времени, нс: " + elapsed);
+* */
