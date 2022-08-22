@@ -195,7 +195,7 @@ public class Main {
 
 
             // наилучший результат +
-            long start1 = System.nanoTime();
+            start = System.nanoTime();
             out.println("Вариант 2");
             StringBuilder textNew = new StringBuilder();
             for (int i = 1; i < text.length(); i++) {
@@ -204,12 +204,12 @@ public class Main {
                 }
             }
             out.println(textNew);
-            long finish1 = System.nanoTime();
-            long elapsed1 = finish1 - start1;
-            out.println("Прошло времени у Ал 2, нс: " + elapsed1);
+            finish = System.nanoTime();
+            elapsed = finish - start;
+            out.println("Прошло времени у Ал 2, нс: " + elapsed);
 
 
-            long start2 = System.nanoTime();
+            start = System.nanoTime();
             out.println("Вариант 3");
             String s = "aabccddefgghiijjkk";
             char[] arr = s.toCharArray();
@@ -223,11 +223,11 @@ public class Main {
             }
 
             out.println();
-            long finish2 = System.nanoTime();
-            long elapsed2 = finish2 - start2;
-            out.println("Прошло времени у Ан, нс: " + elapsed2);
+            finish = System.nanoTime();
+            elapsed = finish - start;
+            out.println("Прошло времени у Ан, нс: " + elapsed);
 
-            long start3 = System.nanoTime();
+            start = System.nanoTime();
             out.println("Вариант 4");
             String str  = "aabccddefgghiijjkk";
             char[] us = str.toCharArray();
@@ -236,10 +236,10 @@ public class Main {
                     out.print(us[i]);
                 }
             }
-            long finish3 = System.nanoTime();
-            long elapsed3 = finish3 - start3;
+            finish = System.nanoTime();
+            elapsed = finish - start;
             out.println();
-            out.println("Прошло времени у Ан, нс: " + elapsed3);
+            out.println("Прошло времени у Ан, нс: " + elapsed);
 
 
 
